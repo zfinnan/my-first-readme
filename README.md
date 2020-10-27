@@ -5,11 +5,11 @@ Repo explaining README.md
 
 ~
 ## Steps to install on local computer
-1. Go to [repo](https://github.com/SEI-ATL/tic-tac-toe) on Github profile
+1. Go to [repo](https://github.com/zfinnan/tic-tac-toe) on Github profile
 2. `fork` and `clone` repo
 3. Clone to local machine
 ```text
-git clone https://github.com/SEI-ATL/tic-tac-toe.git
+git clone https://github.com/zfinnan/tic-tac-toe.git
 ```
 4. Go to `tic-tac-toe` directory
 5. Open `index.html` in browser
@@ -18,42 +18,46 @@ open index.html
 ```
 
 ```javascript
-const handleWin = (letter) => {
-  gameIsLive = false;
-  if (letter === "x") {
-    statusDiv.innerHTML = `${letterToSymbol(letter)} has won!`;
-  } else {
-    statusDiv.innerHTML = `<span>${letterToSymbol(letter)} has won!</span>`;
-  }
-};
-```
-
-```css
-.grid {
-    background-color: salmon;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    gap: 15px;
-    margin-top: 50px;
+function selectWinnerBoxes(b1,b2,b3){
+    b1.classList.add("win");
+    b2.classList.add("win");
+    b3.classList.add("win");
+    turn.innerHTML = b1.innerHTML + " Won!";
+    turn.style.fontSize = "40px";
 }
 ```
 
+```css
+.container .box{float: left;
+                width: 100px;
+                height: 100px;
+                border: 1px solid black;
+                transition: all .25s ease-in-out;
+                font-family: sans-serif; 
+                font-size: 85px;
+                text-align: center;
+                line-height: 100px; 
+                cursor: pointer;
+              }
+```
+
 ```html
-<div class="grid">
-    <div class="box" id="box-1"></div>
-    <div class="box" id="box-2"></div>
-    <div class="box" id="box-3"></div>
-    <div class="box" id="box-4"></div>
-    <div class="box" id="box-5"></div>
-    <div class="box" id="box-6"></div>
-    <div class="box" id="box-7"></div>
-    <div class="box" id="box-8"></div>
-    <div class="box" id="box-9"></div>
+<div class="container" id="main">
+    <span id="turn">Play</span>
+    <div class="box" id="box1"></div>
+    <div class="box" id="box2"></div>
+    <div class="box" id="box3"></div>
+    <div class="box" id="box4"></div>
+    <div class="box" id="box5"></div>
+    <div class="box" id="box6"></div>
+    <div class="box" id="box7"></div>
+    <div class="box" id="box8"></div>
+    <div class="box" id="box9"></div>
 </div>
 ```
 
-| Functions           | Description |
-| -----------         | ----------- |
-| `handleWin()`       | Handle the win of either player |
-| `checkGameStatus()` | Check the status after each turn |
+| Functions            | Description |
+| -----------          | ----------- |
+| `selectWinnerBoxes()`| Determines boxes selected that result in win |
+| `replay()`           | Allows play again button after game end |
+| `getWinner()`        | Determines winner through all possible combinations |
